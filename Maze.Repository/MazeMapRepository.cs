@@ -12,20 +12,22 @@ using Maze.Domain;
 
 namespace Maze.Repository
 {
-    public class MazeMapRepository
-    {
-        public MazePoint[][] ProcessRead()
+    public class MazeMapRepository: IMazeMapRepository
+{
+        public MazeMap GetMazeMap(string filePath)
         {
-            var filePath = @"../../MazeMap.txt";
-
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 throw new IOException("File not found: " + filePath);
             }
 
             var rows = File.ReadLines(filePath).ToList();
+
+            MazePoint start = null;
+            MazePoint goal = null;
             var mazeMap = new MazePoint[rows.Count][];
 
+            //TODO: Maybe this belongs to a Creation Method.
             var i = 0;
             foreach (var row in rows)
             {
@@ -39,16 +41,18 @@ namespace Maze.Repository
                     switch (col)
                     {
                         case 'S':
-                            point = new MazePoint(i, j, MazePointStatus.Start);
+                            point = MazePoint.CreateStartPoint(i, j);
+                            start = point;
                             break;
                         case 'G':
-                            point = new MazePoint(i, j, MazePointStatus.End);
+                            point = MazePoint.CreateGoalPoint(i, j);
+                            goal = point;
                             break;
                         case '_':
-                            point = new MazePoint(i, j, MazePointStatus.Walkable);
+                            point = MazePoint.CreateWalkablePoint(i, j);
                             break;
                         case 'X':
-                            point = new MazePoint(i, j, MazePointStatus.Unwalkable);
+                            point = MazePoint.CreateObstaclePoint(i, j);
                             break;
                         default:
                             throw new InvalidDataException();
@@ -60,7 +64,7 @@ namespace Maze.Repository
                 i++;
             }
 
-            return mazeMap;
+            return new MazeMap(start, goal, mazeMap);
         }
     }
 }

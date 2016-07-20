@@ -4,6 +4,6 @@ namespace Maze.Domain
 {
     public interface IPathFinder
     {
-        string FindPath(MazePoint start, MazePoint end, MazePoint [][] maze);
+        string FindPath(MazeMap map);
     }
 }

@@ -53,9 +53,13 @@
     <Content Include="MazeMap.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Maze.Repository\Maze.Repository.csproj">
-      <Project>{CB74AE0B-4F77-4B97-BDEC-30B6A019D43A}</Project>
-      <Name>Maze.Repository</Name>
+    <ProjectReference Include="..\Maze.Application\Maze.Application.csproj">
+      <Project>{13F82926-CA9D-417F-B813-7EDDE959B3EF}</Project>
+      <Name>Maze.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Maze.Domain\Maze.Domain.csproj">
+      <Project>{34F751E0-E278-4C21-9F8E-6B1E4B9B93B6}</Project>
+      <Name>Maze.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

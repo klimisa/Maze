@@ -2,7 +2,7 @@
 {
     public class SimplePathFinder: IPathFinder
     {
-        public string FindPath(MazePoint start, MazePoint end, MazePoint[][] maze)
+        public string FindPath(MazeMap map)
         {
             throw new System.NotImplementedException();
         }
