@@ -23,7 +23,8 @@ namespace Maze.Application
         public string FindPathFromFile(string filePath)
         {
             var map = _mazeMapRepository.GetMazeMap(filePath);
-            return _pathFinder.FindPath(map);
+            var s = _pathFinder.FindPath(map);
+            return string.Empty;
         }
     }
 }

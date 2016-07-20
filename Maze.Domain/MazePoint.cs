@@ -8,10 +8,11 @@ namespace Maze.Domain
 {
     public enum MazePointStatus
     {
-        Obstacle = 0,
-        Walkable = 1,
-        Start = 2,
-        Goal = 3
+        Start,
+        Goal,
+        Unwalkable,
+        Walkable,
+        Visited
     }
 
     public class MazePoint
@@ -19,6 +20,7 @@ namespace Maze.Domain
         public int X { get; set; }
         public int Y { get; set; }
         public MazePointStatus Status { get; private set; }
+
         private MazePoint(int x, int y, MazePointStatus status)
         {
             X = x;
@@ -43,7 +45,12 @@ namespace Maze.Domain
 
         public static MazePoint CreateObstaclePoint(int x, int y)
         {
-            return new MazePoint(x, y, MazePointStatus.Obstacle);
+            return new MazePoint(x, y, MazePointStatus.Unwalkable);
+        }
+
+        public static MazePoint CreateVisitedPoint(int x, int y)
+        {
+            return new MazePoint(x, y, MazePointStatus.Visited);
         }
     }
 }
