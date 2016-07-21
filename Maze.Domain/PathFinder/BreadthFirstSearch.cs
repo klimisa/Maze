@@ -10,7 +10,8 @@ namespace Maze.Domain.PathFinder
         South,
         West
     }
-    public enum LocationStatus
+
+    public enum SquareStatus
     {
         Invalid,
         Goal,
@@ -19,61 +20,59 @@ namespace Maze.Domain.PathFinder
         Start,
         Unknown
     }
+
     public class BreadthFirstSearch : IPathFinderStrategy
     {
         public List<MazePoint> FindPath(MazePoint startPoint, MazePoint[,] map)
         {
-            var distanceFromTop = startPoint.X ;
-            var distanceFromLeft = startPoint.Y;
+            var square = new Square(startPoint.X, startPoint.Y);
+            square.Path.AddRange(new List<MazePoint> {startPoint});
 
-            var location = new Location(distanceFromTop, distanceFromLeft, LocationStatus.Start);
-            location.Path.AddRange(new List<MazePoint> { startPoint });
+            var queue = new Queue<Square>();
+            queue.Enqueue(square);
 
-            var queue = new Queue<Location>();
-            queue.Enqueue(location);
-
-            Location newLocation;
+            Square newSquare;
             while (queue.Count > 0)
             {
-                var currentLocation = queue.Dequeue();
+                var currentSquare = queue.Dequeue();
 
                 // Explore North
-                newLocation = ExporeInDirection(currentLocation, Direction.North, map);
-                if (newLocation.Status == LocationStatus.Goal)
-                    return newLocation.Path;
-                if (newLocation.Status == LocationStatus.Valid)
-                    queue.Enqueue(newLocation);
+                newSquare = ExporeInDirection(currentSquare, Direction.North, map);
+                if (newSquare.Status == SquareStatus.Goal)
+                    return newSquare.Path;
+                if (newSquare.Status == SquareStatus.Valid)
+                    queue.Enqueue(newSquare);
 
                 // Explore East
-                newLocation = ExporeInDirection(currentLocation, Direction.East, map);
-                if (newLocation.Status == LocationStatus.Goal)
-                    return newLocation.Path;
-                if (newLocation.Status == LocationStatus.Valid)
-                    queue.Enqueue(newLocation);
+                newSquare = ExporeInDirection(currentSquare, Direction.East, map);
+                if (newSquare.Status == SquareStatus.Goal)
+                    return newSquare.Path;
+                if (newSquare.Status == SquareStatus.Valid)
+                    queue.Enqueue(newSquare);
 
                 // Explore South
-                newLocation = ExporeInDirection(currentLocation, Direction.South, map);
-                if (newLocation.Status == LocationStatus.Goal)
-                    return newLocation.Path;
-                if (newLocation.Status == LocationStatus.Valid)
-                    queue.Enqueue(newLocation);
+                newSquare = ExporeInDirection(currentSquare, Direction.South, map);
+                if (newSquare.Status == SquareStatus.Goal)
+                    return newSquare.Path;
+                if (newSquare.Status == SquareStatus.Valid)
+                    queue.Enqueue(newSquare);
 
                 // Explore West
-                newLocation = ExporeInDirection(currentLocation, Direction.West, map);
-                if (newLocation.Status == LocationStatus.Goal)
-                    return newLocation.Path;
-                if (newLocation.Status == LocationStatus.Valid)
-                    queue.Enqueue(newLocation);
+                newSquare = ExporeInDirection(currentSquare, Direction.West, map);
+                if (newSquare.Status == SquareStatus.Goal)
+                    return newSquare.Path;
+                if (newSquare.Status == SquareStatus.Valid)
+                    queue.Enqueue(newSquare);
 
             }
 
-            return location.Path;
+            return square.Path;
         }
 
-        private Location ExporeInDirection(Location currentLocation, Direction direction, MazePoint[,] mazeMap)
+        private Square ExporeInDirection(Square currentSquare, Direction direction, MazePoint[,] mazeMap)
         {
-            var x = currentLocation.DistanceFromTop;
-            var y = currentLocation.DistanceFromLeft;
+            var x = currentSquare.X;
+            var y = currentSquare.Y;
 
             switch (direction)
             {
@@ -91,52 +90,57 @@ namespace Maze.Domain.PathFinder
                     break;
             }
 
-            var newLocation = new Location(x, y, LocationStatus.Unknown);
-            newLocation.Status = CheckLocationStatus(newLocation, mazeMap);
+            return currentSquare.NewSquare(x, y, mazeMap); ;
+        }
+    }
 
-            if (newLocation.Status == LocationStatus.Valid || newLocation.Status == LocationStatus.Goal)
-            {
-                mazeMap[x, y].IsVisited = true;
-                newLocation.Path.AddRange(new List<MazePoint>(currentLocation.Path) {mazeMap[x, y]});
-            }
+    public class Square
+    {
+        public int X { get; }
+        public int Y { get; }
+        public List<MazePoint> Path { get; set; }
+        public SquareStatus Status { get; set; }
 
+        public Square(int x, int y)
+        {
+            X = x;
+            Y = y;
 
-            return newLocation;
+            Path = new List<MazePoint>();
         }
 
-        private LocationStatus CheckLocationStatus(Location location, MazePoint[,] map)
+        public Square NewSquare(int x, int y, MazePoint[,] map)
+        {
+            var newSquare = new Square(x, y);
+            newSquare.Status = CheckNewSquare(newSquare, map);
+
+            if (newSquare.Status == SquareStatus.Valid || newSquare.Status == SquareStatus.Goal)
+            {
+                map[x, y].IsVisited = true;
+                newSquare.Path.AddRange(new List<MazePoint>(this.Path) { map[x, y] });
+            }
+
+            return newSquare;
+        }
+
+        private SquareStatus CheckNewSquare(Square square, MazePoint[,] map)
         {
             var mapSizeAxisX = map.GetLength(0);
             var mapSizeAxisY = map.GetLength(1);
 
-            var x = location.DistanceFromTop;
-            var y = location.DistanceFromLeft;
+            var x = square.X;
+            var y = square.Y;
 
             if (y < 0 || y >= mapSizeAxisY || x < 0 || x >= mapSizeAxisX)
-                return LocationStatus.Invalid;
+                return SquareStatus.Invalid;
 
-            if (map[x,y].Status == MazePointStatus.Goal)
-                return LocationStatus.Goal;
+            if (map[x, y].Status == MazePointStatus.Goal)
+                return SquareStatus.Goal;
 
-            if (map[x,y].Status != MazePointStatus.Empty || map[x,y].IsVisited)
-                return LocationStatus.Blocked;
+            if (map[x, y].Status != MazePointStatus.Empty || map[x, y].IsVisited)
+                return SquareStatus.Blocked;
 
-            return LocationStatus.Valid;
+            return SquareStatus.Valid;
         }
     }
-    public class Location
-        {
-            public int DistanceFromTop { get; private set; }
-            public int DistanceFromLeft { get; private set; }
-            public List<MazePoint> Path { get; set; }
-            public LocationStatus Status { get; set; }
-
-            public Location(int distanceFromTop, int distanceFromLeft, LocationStatus status)
-            {
-                DistanceFromTop = distanceFromTop;
-                DistanceFromLeft = distanceFromLeft;
-                Path = new List<MazePoint>();
-                Status = status;
-            }
-        }
 }

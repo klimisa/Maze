@@ -1,4 +1,6 @@
-﻿namespace Maze.Domain.Points
+﻿using System.Runtime.CompilerServices;
+
+namespace Maze.Domain.Points
 {
     public enum MazePointStatus
     {
