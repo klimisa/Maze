@@ -22,7 +22,7 @@ namespace Maze.ConsoleApp
             var pathFinderService = new PathFinderService();
             var actorRoute = pathFinderService.FindPathFromFile(filePath);
 
-            Console.WriteLine(actorRoute.ToString());
+            Console.WriteLine(actorRoute);
             Console.ReadLine();
         }
 

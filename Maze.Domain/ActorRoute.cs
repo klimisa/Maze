@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Maze.Domain.Points;
 
 namespace Maze.Domain
 {
@@ -13,7 +14,7 @@ namespace Maze.Domain
 
         public override string ToString()
         {
-            return $"({string.Join(", ", _route)})";
+            return $"{string.Join(", ", _route)}";
         }
     }
 }

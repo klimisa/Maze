@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Maze.Domain.Points;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
@@ -11,30 +12,31 @@ namespace Maze.Domain.Tests
     public class PointTests
     {
         [Test]
-        public void StartPointToString()
+        public void StartPointPrint()
         {
-            var point = MazePoint.CreateStartPoint(0, 0);
+            var point = new StartPoint(0, 0);
             var output = @"(1:1 (S))";
 
             Assert.AreEqual(output, point.ToString());
         }
 
         [Test]
-        public void GoalPointToString()
+        public void GoalPointToPrint()
         {
-            var point = MazePoint.CreateGoalPoint(0, 0);
+            var point = new GoalPoint(0, 0);
             var output = @"(1:1 (G))";
 
             Assert.AreEqual(output, point.ToString());
         }
 
         [Test]
-        public void WalkablePointToString()
+        public void PointEmptyOrWallBlockPrint()
         {
-            var point = MazePoint.CreateWalkablePoint(0, 0);
+            var emptyPoint = new EmptyPoint(0, 0);
+
             var output = @"(1:1)";
 
-            Assert.AreEqual(output, point.ToString());
+            Assert.AreEqual(output, emptyPoint.ToString());
         }
     }
 }

@@ -41,12 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActorRoute.cs" />
+    <Compile Include="PathFinder\BreadthFirstSearch.cs" />
     <Compile Include="IMazeMapRepository.cs" />
-    <Compile Include="IRouteDiscovery.cs" />
+    <Compile Include="PathFinder\IPathFinderStrategy.cs" />
     <Compile Include="MazeMap.cs" />
-    <Compile Include="MazePoint.cs" />
+    <Compile Include="Points\WallPoint.cs" />
+    <Compile Include="Points\EmptyPoint.cs" />
+    <Compile Include="Points\MazePoint.cs" />
+    <Compile Include="Points\GoalPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleRouteDiscovery.cs" />
+    <Compile Include="RouteDiscovery.cs" />
+    <Compile Include="Points\StartPoint.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

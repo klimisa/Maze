@@ -45,9 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MazeMapTests.cs" />
-    <Compile Include="PathTests.cs" />
+    <Compile Include="ActorRouteTests.cs" />
     <Compile Include="PointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteDiscoveryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
