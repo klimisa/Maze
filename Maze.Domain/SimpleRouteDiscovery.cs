@@ -22,14 +22,15 @@ namespace Maze.Domain
         Unknown
     }
 
-    public class SimplePathFinder : IPathFinder
+    public class SimpleRouteDiscovery : IRouteDiscovery
     {
-        public List<MazePoint> FindPath(MazeMap mazeMap)
+        //TODO: Add TEST
+        public ActorRoute FindActorRoute(MazeMap mazeMap)
         {
             var distanceFromTop = mazeMap.Start.X;
             var distanceFromLeft = mazeMap.Start.Y;
-
-            var location = new Location(distanceFromTop, distanceFromLeft, new List<MazePoint>(), LocationStatus.Start);
+            var newPath = new List<MazePoint> {MazePoint.CreateVisitedPoint(distanceFromTop, distanceFromLeft)};
+            var location = new Location(distanceFromTop, distanceFromLeft, newPath, LocationStatus.Start);
 
             var queue = new Queue<Location>();
             queue.Enqueue(location);
@@ -42,34 +43,34 @@ namespace Maze.Domain
                 // Explore North
                 newLocation = ExporeInDirection(currentLocation, Direction.North, mazeMap.Map);
                 if (newLocation.Status == LocationStatus.Goal)
-                    return newLocation.Path;
+                    return new ActorRoute(newLocation.Path);
                 if (newLocation.Status == LocationStatus.Valid)
                     queue.Enqueue(newLocation);
 
                 // Explore East
                 newLocation = ExporeInDirection(currentLocation, Direction.East, mazeMap.Map);
                 if (newLocation.Status == LocationStatus.Goal)
-                    return newLocation.Path;
+                    return new ActorRoute(newLocation.Path);
                 if (newLocation.Status == LocationStatus.Valid)
                     queue.Enqueue(newLocation);
 
                 // Explore South
                 newLocation = ExporeInDirection(currentLocation, Direction.South, mazeMap.Map);
                 if (newLocation.Status == LocationStatus.Goal)
-                    return newLocation.Path;
+                    return new ActorRoute(newLocation.Path);
                 if (newLocation.Status == LocationStatus.Valid)
                     queue.Enqueue(newLocation);
 
                 // Explore West
                 newLocation = ExporeInDirection(currentLocation, Direction.West, mazeMap.Map);
                 if (newLocation.Status == LocationStatus.Goal)
-                    return newLocation.Path;
+                    return new ActorRoute(newLocation.Path);
                 if (newLocation.Status == LocationStatus.Valid)
                     queue.Enqueue(newLocation);
 
             }
 
-            return null;
+            return new ActorRoute(location.Path); ;
         }
 
         private Location ExporeInDirection(Location currentLocation, Direction direction, MazePoint[][] mazeMap)

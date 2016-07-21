@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.IO.MemoryMappedFiles;
+using System.Threading;
 using Maze.Domain;
 using Maze.Repository;
 
@@ -6,25 +7,25 @@ namespace Maze.Application
 {
     public class PathFinderService
     {
-        private readonly IPathFinder _pathFinder;
+        private readonly IRouteDiscovery _routeDiscovery;
         private readonly IMazeMapRepository _mazeMapRepository;
 
-        public PathFinderService() : this(new SimplePathFinder(), new MazeMapRepository()) //Poor's man DI.
+        public PathFinderService() : this(new SimpleRouteDiscovery(), new MazeMapRepository()) //Poor's man DI.
         {
             
         }
 
-        public PathFinderService(IPathFinder pathFinder, IMazeMapRepository mazeMapRepository)
+        public PathFinderService(IRouteDiscovery routeDiscovery, IMazeMapRepository mazeMapRepository)
         {
-            _pathFinder = pathFinder;
+            _routeDiscovery = routeDiscovery;
             _mazeMapRepository = mazeMapRepository;
         }
 
-        public string FindPathFromFile(string filePath)
+        public ActorRoute FindPathFromFile(string filePath)
         {
             var map = _mazeMapRepository.GetMazeMap(filePath);
-            var s = _pathFinder.FindPath(map);
-            return string.Empty;
+            var actorRoute = _routeDiscovery.FindActorRoute(map);
+            return actorRoute;
         }
     }
 }

@@ -3,8 +3,8 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Maze.Domain
 {
-    public interface IPathFinder
+    public interface IRouteDiscovery
     {
-        List<MazePoint> FindPath(MazeMap map);
+        ActorRoute FindActorRoute(MazeMap map);
     }
 }

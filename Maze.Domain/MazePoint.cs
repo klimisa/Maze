@@ -17,8 +17,9 @@ namespace Maze.Domain
 
     public class MazePoint
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
+
         public MazePointStatus Status { get; private set; }
 
         private MazePoint(int x, int y, MazePointStatus status)
@@ -51,6 +52,19 @@ namespace Maze.Domain
         public static MazePoint CreateVisitedPoint(int x, int y)
         {
             return new MazePoint(x, y, MazePointStatus.Visited);
+        }
+
+        public override string ToString()
+        {
+            switch (Status)
+            {
+                case MazePointStatus.Start:
+                    return $"({X + 1}:{Y + 1} (S))";
+                case MazePointStatus.Goal:
+                    return $"({X + 1}:{Y + 1} (G))";
+            }
+
+            return $"({X + 1}:{Y + 1})";
         }
     }
 }
