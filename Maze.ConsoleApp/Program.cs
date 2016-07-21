@@ -13,7 +13,12 @@ namespace Maze.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\MazeMap.txt");
+            //TODO: A Menu
+            //1. Sample1
+            //2. Sample2
+            //3. Your sample file
+
+            var filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\MazeMapS1.txt");
             var pathFinderService = new PathFinderService();
             var path = pathFinderService.FindPathFromFile(filePath);
 

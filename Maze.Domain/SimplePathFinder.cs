@@ -26,8 +26,8 @@ namespace Maze.Domain
     {
         public List<MazePoint> FindPath(MazeMap mazeMap)
         {
-            var distanceFromTop = mazeMap.Start.Y;
-            var distanceFromLeft = mazeMap.Start.X;
+            var distanceFromTop = mazeMap.Start.X;
+            var distanceFromLeft = mazeMap.Start.Y;
 
             var location = new Location(distanceFromTop, distanceFromLeft, new List<MazePoint>(), LocationStatus.Start);
 
@@ -74,7 +74,7 @@ namespace Maze.Domain
 
         private Location ExporeInDirection(Location currentLocation, Direction direction, MazePoint[][] mazeMap)
         {
-            var newPath = currentLocation.Path.Where(x => true).ToList();
+            var newPath = new List<MazePoint>(currentLocation.Path);
 
             var dft = currentLocation.DistanceFromTop;
             var dfl = currentLocation.DistanceFromLeft;
@@ -95,7 +95,7 @@ namespace Maze.Domain
                     break;
             }
 
-            newPath.Add(MazePoint.CreateVisitedPoint(dfl, dft));
+            newPath.Add(MazePoint.CreateVisitedPoint(dft, dfl));
             var newLocation = new Location(dft, dfl, newPath, LocationStatus.Unknown);
             newLocation.Status = SetLocationStatus(newLocation, mazeMap);
 
@@ -123,7 +123,7 @@ namespace Maze.Domain
             if (mazeMap[dft][dfl].Status == MazePointStatus.Goal)
                 return LocationStatus.Goal;
           
-            if (mazeMap[dft][dfl].Status != MazePointStatus.Unwalkable)
+            if (mazeMap[dft][dfl].Status != MazePointStatus.Walkable)
                 // location is either an obstacle or has been visited
                 return LocationStatus.Blocked;
 

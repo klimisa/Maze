@@ -50,7 +50,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MazeMap.txt" />
+    <Content Include="MazeMapS2.txt" />
+    <Content Include="MazeMapS1.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Maze.Application\Maze.Application.csproj">
