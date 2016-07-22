@@ -18,11 +18,20 @@ namespace Maze.ConsoleApp
             //2. Sample2
             //3. Your sample file
 
-            var filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\MazeMapS2.txt");
-            var pathFinderService = new PathFinderService();
-            var actorRoute = pathFinderService.FindPathFromFile(filePath);
+            try
+            {
+                var filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\MazeMapS2.txt");
+                var pathFinderService = new PathFinderService();
+                var actorRoute = pathFinderService.FindPathFromFile(filePath);
 
-            Console.WriteLine(actorRoute);
+                Console.WriteLine(actorRoute);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
             Console.ReadLine();
         }
 
