@@ -15,7 +15,7 @@ where
  - S: Start Point
  - G: Goal Point
  - _: Empty Point
- - X: Block Point
+ - X: Wall Point
  
 ### Path finding algorithm
 The technique used for this demonstration is called "Breadth-First Search".
@@ -44,11 +44,11 @@ Here is the service which cordinates the path finding by the folowing steps
 ###### Domain
 The domain layer is responsible for supplying the Algorithm Strategy and has the objects are necessary to perform the actor's route finding.
 Here concepts emerges like,
- - [Start Point]()
- - [Goal Point]
- - [Empty Point]
- - [Block Point]
- - [Square]
+ - [Start Point](https://github.com/klimisa/Maze/blob/master/Maze.Domain/Points/StartPoint.cs)
+ - [Goal Point](https://github.com/klimisa/Maze/blob/master/Maze.Domain/Points/GoalPoint.cs)
+ - [Empty Point](https://github.com/klimisa/Maze/blob/master/Maze.Domain/Points/EmptyPoint.cs)
+ - [Wall Point](https://github.com/klimisa/Maze/blob/master/Maze.Domain/Points/WallPoint.cs)
+ - [Square](https://github.com/klimisa/Maze/blob/master/Maze.Domain/PathFinder/Square.cs)
 
 
 ### External Sources
