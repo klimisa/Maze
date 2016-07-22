@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Maze.Domain.Points;
 
-namespace Maze.Domain
+namespace Maze.Domain.Service
 {
     public class ActorRoute
     {

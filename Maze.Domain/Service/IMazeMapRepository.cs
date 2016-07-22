@@ -1,4 +1,4 @@
-namespace Maze.Domain
+namespace Maze.Domain.Service
 {
     public interface IMazeMapRepository
     {

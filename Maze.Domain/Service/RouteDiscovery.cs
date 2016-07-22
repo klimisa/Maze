@@ -1,10 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using Maze.Domain.PathFinder;
-using Maze.Domain.Points;
+﻿using Maze.Domain.PathFinder;
 
-namespace Maze.Domain
+namespace Maze.Domain.Service
 {
  
 
@@ -17,7 +13,6 @@ namespace Maze.Domain
             _pathFinder = pathFinder;
         }
 
-        //TODO: Add TEST
         public ActorRoute FindActorRoute(MazeMap mazeMap)
         {
             return new ActorRoute(_pathFinder.FindPath(mazeMap.Start, mazeMap.Map));

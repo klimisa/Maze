@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Maze.Domain.Points;
+using Maze.Domain.Service;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 

@@ -2,6 +2,7 @@
 using System.Threading;
 using Maze.Domain;
 using Maze.Domain.PathFinder;
+using Maze.Domain.Service;
 using Maze.Repository;
 
 namespace Maze.Application

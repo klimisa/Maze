@@ -1,5 +1,6 @@
 ﻿using Maze.Domain.PathFinder;
 using Maze.Domain.Points;
+using Maze.Domain.Service;
 using NUnit.Framework;
 
 namespace Maze.Domain.Tests

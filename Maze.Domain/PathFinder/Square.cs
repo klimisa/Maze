@@ -32,6 +32,10 @@ namespace Maze.Domain.PathFinder
             return newSquare;
         }
 
+        // This function will check a Square's status
+        // (a Square is "valid" if it is on the Map, is not a "Block",
+        // and has not yet been visited by our algorithm)
+        // Returns "Valid", "Invalid", "Blocked", or "Goal"
         private SquareStatus CheckNewSquare(Square square, MazePoint[,] map)
         {
             var mapSizeAxisX = map.GetLength(0);

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Maze.Domain;
 using Maze.Domain.Points;
+using Maze.Domain.Service;
 
 namespace Maze.Repository
 {

@@ -40,17 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActorRoute.cs" />
+    <Compile Include="Service\ActorRoute.cs" />
     <Compile Include="PathFinder\BreadthFirstSearch.cs" />
-    <Compile Include="IMazeMapRepository.cs" />
+    <Compile Include="Service\IMazeMapRepository.cs" />
     <Compile Include="PathFinder\IPathFinderStrategy.cs" />
-    <Compile Include="MazeMap.cs" />
+    <Compile Include="Service\MazeMap.cs" />
+    <Compile Include="PathFinder\Square.cs" />
     <Compile Include="Points\WallPoint.cs" />
     <Compile Include="Points\EmptyPoint.cs" />
     <Compile Include="Points\MazePoint.cs" />
     <Compile Include="Points\GoalPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RouteDiscovery.cs" />
+    <Compile Include="Service\RouteDiscovery.cs" />
     <Compile Include="Points\StartPoint.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

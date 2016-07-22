@@ -25,9 +25,12 @@ namespace Maze.Domain.PathFinder
     {
         public List<MazePoint> FindPath(MazePoint startPoint, MazePoint[,] map)
         {
+            // Each "Square" will store its coordinates
+            // and the shortest path required to arrive there
             var square = new Square(startPoint.X, startPoint.Y);
             square.Path.AddRange(new List<MazePoint> {startPoint});
 
+            // Initialize the queue with the start Square already inside
             var queue = new Queue<Square>();
             queue.Enqueue(square);
 
@@ -69,6 +72,8 @@ namespace Maze.Domain.PathFinder
             return square.Path;
         }
 
+        // Explores the Map from the given Square in the given
+        // direction
         private Square ExporeInDirection(Square currentSquare, Direction direction, MazePoint[,] mazeMap)
         {
             var x = currentSquare.X;
