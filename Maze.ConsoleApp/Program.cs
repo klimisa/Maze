@@ -18,7 +18,7 @@ namespace Maze.ConsoleApp
             //2. Sample2
             //3. Your sample file
 
-            var filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\MazeMapS1.txt");
+            var filePath = Path.Combine(Environment.CurrentDirectory, @"..\..\MazeMapS2.txt");
             var pathFinderService = new PathFinderService();
             var actorRoute = pathFinderService.FindPathFromFile(filePath);
 

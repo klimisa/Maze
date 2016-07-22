@@ -11,6 +11,7 @@ namespace Maze.Domain.Tests
         public void RouteDiscoveryFindActorRoute()
         {
             var startPoint = new StartPoint(0, 0);
+            var goalPoint = new GoalPoint(3, 4);
             var mazeMap = new MazePoint[,]
             {
                 { new StartPoint(0, 0), new EmptyPoint(0, 1), new EmptyPoint(0, 2), new EmptyPoint(0, 3), new WallPoint (0, 4) },
@@ -20,7 +21,7 @@ namespace Maze.Domain.Tests
                 { new EmptyPoint(4, 0), new EmptyPoint(4, 1), new EmptyPoint(4, 2), new WallPoint (4, 3), new EmptyPoint(4, 4)}
             };
             
-            var map = new MazeMap(startPoint, mazeMap);
+            var map = new MazeMap(startPoint, goalPoint, mazeMap);
 
             var routeDiscovery = new RouteDiscovery(new BreadthFirstSearch());
             var actorRoute = routeDiscovery.FindActorRoute(map);

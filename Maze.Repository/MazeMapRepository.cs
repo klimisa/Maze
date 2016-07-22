@@ -66,7 +66,7 @@ namespace Maze.Repository
                     i++;
                 }
 
-                return new MazeMap(start, mazeMap);
+                return new MazeMap(start, goal, mazeMap);
             }
             catch (Exception e)
             {
