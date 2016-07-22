@@ -50,6 +50,13 @@ Here concepts emerges like,
  - [Wall Point](https://github.com/klimisa/Maze/blob/master/Maze.Domain/Points/WallPoint.cs)
  - [Square](https://github.com/klimisa/Maze/blob/master/Maze.Domain/PathFinder/Square.cs)
 
+###### Repositoty
+This layer is resposible to read the file with the Maze map and transform it to a [MazeMap](https://github.com/klimisa/Maze/blob/master/Maze.Domain/Service/MazeMap.cs) object.
+
+### Improvement
+ - Algorithm Refactoring towards simpler design
+ - Perfomance tunning using for ex. linked lists and trees.
+
 
 ### External Sources
   - [NUnit](https://www.nuget.org/packages/NUnit/)
