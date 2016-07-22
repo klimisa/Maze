@@ -25,7 +25,7 @@ namespace Maze.Repository
                     throw new IOException("File not found: " + filePath);
                 }
 
-                var rows = File.ReadLines(filePath).ToList();
+                var rows = GetDataLines(filePath).ToList();
 
                 MazePoint start = null;
                 MazePoint goal = null;
@@ -74,6 +74,19 @@ namespace Maze.Repository
                 throw;
             }
         }
-    }
+
+        private static IEnumerable<string> GetDataLines(string dataFile)
+        {
+            var sr = new StreamReader(dataFile);
+            string line;
+
+            while ((line = sr.ReadLine()) != null)
+            {
+                yield return line;
+            }
+
+            sr.Close();
+        }
+}
 }
 
